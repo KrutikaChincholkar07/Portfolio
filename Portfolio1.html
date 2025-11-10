@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Krutika Chincholkar | Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #1c1b29;
+      font-family: "Poppins", sans-serif;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(8px);
+      z-index: 2;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      letter-spacing: 1px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffd93d;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      z-index: 1;
+      position: relative;
+    }
+
+    .hero h2 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      background: #ffd93d;
+      color: #000;
+      padding: 12px 28px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: #ffea5c;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 100px 10%;
+      position: relative;
+      z-index: 1;
+    }
+
+    h2.section-title {
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 50px;
+      color: #ffd93d;
+    }
+
+    #about p {
+      max-width: 900px;
+      margin: 0 auto 40px auto;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #ddd;
+      text-align: center;
+    }
+
+    .skills-tags {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      gap: 20px;
+    }
+
+    .skill-tag {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 12px 25px;
+      border-radius: 25px;
+      color: #ffd93d;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    /* Centered Skills Section */
+    #skills {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    #skills .skill-group {
+      margin-bottom: 40px;
+      max-width: 700px;
+    }
+
+    #skills h3 {
+      color: #ffd93d;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+    }
+
+    #skills ul {
+      list-style: none;
+      color: #ccc;
+      line-height: 1.8;
+      font-size: 1.05rem;
+      padding-left: 0;
+    }
+
+    /* Centered Achievements Section */
+    #achievements {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
+    }
+
+    #achievements ul {
+      list-style: none;
+      color: #ccc;
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px 40px;
+      border-radius: 15px;
+    }
+
+    #achievements li {
+      margin-bottom: 20px;
+    }
+
+    #achievements strong {
+      color: #ffd93d;
+      font-size: 1.1rem;
+    }
+
+    .project-category {
+      margin-bottom: 60px;
+    }
+
+    .project-category h3 {
+      font-size: 1.5rem;
+      color: #ffd93d;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .project-card h4 {
+      color: #ffd93d;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: #ccc;
+      font-size: 0.95rem;
+    }
+
+    #contact {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .contact-info {
+      font-size: 1.1rem;
+      color: #ccc;
+      line-height: 1.8;
+    }
+
+    .contact-info a {
+      color: #ffd93d;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .contact-info a:hover {
+      color: #fff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      background: rgba(0, 0, 0, 0.2);
+      color: #aaa;
+      font-size: 0.9rem;
+      z-index: 2;
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+      }
+      nav {
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <header>
+    <h1>Krutika's Portfolio</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <h2>Hi, I'm <span style="color:#ffd93d;">Krutika Chincholkar</span></h2>
+    <p>Frontend Developer | ML-AI Enthusiast | Game Developer | UI/UX Designer</p>
+    <a href="#projects"><button class="btn">View My Work</button></a>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title">About Me</h2>
+    <p>
+      Hello! I’m Krutika, a passionate and creative developer who loves transforming ideas into intelligent, visually engaging digital experiences. 
+      My work lives at the crossroads of AI, Web Development, Game Design, and UI/UX, where I blend creativity with technical precision to make technology more human, useful, and exciting.
+    </p>
+    <p>
+      I enjoy designing responsive websites that feel effortless to use, developing interactive games that tell stories through code and design, 
+      and building AI- and ML-powered systems that solve real-world problems with smart automation. My approach combines data-driven logic, 
+      design thinking, and innovation, allowing me to craft solutions that are both functional and delightful.
+    </p>
+    <p>
+      When I’m not coding, I’m usually exploring new technologies, prototyping creative ideas, or fine-tuning digital interfaces that connect users and technology in meaningful ways.
+    </p>
+
+    <div class="skills-tags">
+      <div class="skill-tag">Frontend Development</div>
+      <div class="skill-tag">Machine Learning / AI</div>
+      <div class="skill-tag">Game Development</div>
+      <div class="skill-tag">UI / UX Design</div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skill-group">
+      <h3>💻 Languages</h3>
+      <ul><li>C++, Java, Python, C#</li></ul>
+    </div>
+
+    <div class="skill-group">
+      <h3>⚙️ Frameworks & Tools</h3>
+      <ul><li>HTML, Unity, Blender, Figma, Git/GitHub, VS Code, PyCharm, TensorFlow, OpenCV (ML)</li></ul>
+    </div>
+
+    <div class="skill-group">
+      <h3>🧠 Soft Skills</h3>
+      <ul><li>Problem-solving, Creativity, Leadership, Project Management</li></ul>
+    </div>
+  </section>
+
+  <section id="achievements">
+    <h2 class="section-title">Achievements</h2>
+    <ul>
+      <li>
+        <strong>🏅 Winner - Class LeaderBoard Recognition:</strong> <em>May 2025</em><br>
+        Ranked 1st for overall class presentation, participation, and self-representation. Awarded for excellence in holistic student conduct.
+      </li>
+      <li>
+        <strong>🥇 Topped the Build-a-Thone 2.0 Hackathon:</strong> <em>Apr 2025</em><br>
+        Ranked 1st among 200+ teams; prototyped a generative AI mental health monitoring system.
+      </li>
+      <li>
+        <strong>🌟 Top 100 in Ideathon by IIT Delhi & SBI:</strong> <em>Mar 2025</em><br>
+        Selected in the top 100 among 9,000+ startups in the IdeaThon organized by SBI and IIT Delhi.
+      </li>
+      <li>
+        <strong>🥈 Secured 2nd Rank - DriveDev Hackathon:</strong> <em>Sep 2024</em><br>
+        Secured 2nd place among 350+ teams; delivered a robust AI solution under 36-hour pressure.
+      </li>
+    </ul>
+  </section>
+
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+
+    <div class="project-category">
+      <h3>🌐 Website Projects</h3>
+      <div class="projects">
+        <div class="project-card">
+          <h4>Weather Website</h4>
+          <p>A real-time weather tracking website with dynamic API integration.</p>
+        </div>
+        <div class="project-card">
+          <h4>Dear Task Management</h4>
+          <p>A modern productivity app for managing daily tasks, featuring dark mode and calendar.</p>
+        </div>
+        <div class="project-card">
+          <h4>Pastry Town (Figma)</h4>
+          <p>A Figma UI/UX design for a bakery website with an aesthetic interface.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-category">
+      <h3>🎮 Game Projects</h3>
+      <div class="projects">
+        <div class="project-card"><h4>N-Queens (DSA)</h4><p>Interactive visualization of the N-Queens problem using backtracking.</p></div>
+        <div class="project-card"><h4>Ball Sorting (DSA)</h4><p>A puzzle game implementing stack-based logic using JavaScript.</p></div>
+        <div class="project-card"><h4>Rocket-X</h><p>A fun and challenging space game inspired by Flappy Bird mechanics.</p></div>
+        <div class="project-card"><h4>Royal Run</h4><p>An endless runner game with dynamic difficulty and smooth animations.</p></div>
+        <div class="project-card"><h4>Tower of Hanoi (DSA)</h4><p>Visual representation of the classic recursive Tower of Hanoi problem.</p></div>
+      </div>
+    </div>
+
+    <div class="project-category">
+      <h3>🤖 ML / AI Projects</h3>
+      <div class="projects">
+        <div class="project-card"><h4>Traffic Eye</h4><p>Reduced signal wait time by 35% using YOLO-based smart automation.</p></div>
+        <div class="project-card"><h4>BookVerse</h4><p>NLP-driven book recommender built using Flask and machine learning.</p></div>
+        <div class="project-card"><h4>EchoNest</h4><p>Smart home assistant that recognizes sounds like glass breaking or a baby crying using deep learning and Twilio API for real-time alerts.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-info">
+      <p>📧 Email: <a href="link">abc@gmail.com</a></p>
+      <p>🌐 GitHub: <a href="link" target="_blank">github.com/abc</a></p>
+      <p>💼 LinkedIn: <a href="link" target="_blank">linkedin.com/in/abc</a></p>
+    </div>
+  </section>
+
+  <footer>© 2025 Krutika Chincholkar. All rights reserved.</footer>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let mouse = { x: null, y: null, radius: 120 };
+    window.addEventListener("mousemove", e => { mouse.x = e.x; mouse.y = e.y; });
+
+    class Ball {
+      constructor(x, y, dx, dy, size, color) {
+        this.x = x; this.y = y; this.dx = dx; this.dy = dy;
+        this.size = size; this.color = color;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color; ctx.fill();
+      }
+      update() {
+        if (this.x + this.size > canvas.width || this.x - this.size < 0) this.dx = -this.dx;
+        if (this.y + this.size > canvas.height || this.y - this.size < 0) this.dy = -this.dy;
+        this.x += this.dx; this.y += this.dy;
+        const dx = mouse.x - this.x, dy = mouse.y - this.y, dist = Math.sqrt(dx*dx+dy*dy);
+        if (dist < mouse.radius + this.size) {
+          if (mouse.x < this.x) this.x += 3;
+          if (mouse.x > this.x) this.x -= 3;
+          if (mouse.y < this.y) this.y += 3;
+          if (mouse.y > this.y) this.y -= 3;
+        }
+        this.draw();
+      }
+    }
+
+    const colors = ["#FF6B6B", "#FFD93D", "#6BCB77", "#4D96FF", "#FF8C32"];
+    let balls = [];
+
+    function init() {
+      balls = [];
+      for (let i = 0; i < 200; i++) {
+        const size = Math.random() * 8 + 3;
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const dx = (Math.random() - 0.5) * 1.5;
+        const dy = (Math.random() - 0.5) * 1.5;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        balls.push(new Ball(x, y, dx, dy, size, color));
+      }
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      balls.forEach(b => b.update());
+    }
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      init();
+    });
+
+    init();
+    animate();
+  </script>
+</body>
+</html>
